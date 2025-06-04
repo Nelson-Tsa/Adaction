@@ -17,23 +17,38 @@ export class AuthService {
   
   isAssociation(): boolean {
     const token: any = localStorage.getItem('token');
-    const decoded : any = jwtDecode(token);
-    const role = decoded.role;
-    return role === 'ASSOCIATION';
+    if (!token) return false;
+    try {
+      const decoded : any = jwtDecode(token);
+      const role = decoded.role;
+      return role === 'ASSOCIATION';
+    } catch (error) {
+      return false;
+    }
   }
   
   isVolunteer(): boolean {
     const token: any = localStorage.getItem('token');
-    const decoded : any = jwtDecode(token);
-    const role = decoded.role;
-    return role === 'VOLONTAIRE';
+    if (!token) return false;
+    try {
+      const decoded : any = jwtDecode(token);
+      const role = decoded.role;
+      return role === 'VOLONTAIRE';
+    } catch (error) {
+      return false;
+    }
   }
   
   isAdministrator(): boolean {
     const token: any = localStorage.getItem('token');
-    const decoded : any = jwtDecode(token);
-    const role = decoded.role;
-    return role === 'ADMIN';
+    if (!token) return false;
+    try {
+      const decoded : any = jwtDecode(token);
+      const role = decoded.role;
+      return role === 'ADMIN';
+    } catch (error) {
+      return false;
+    }
   }
   
   getRole(): string {

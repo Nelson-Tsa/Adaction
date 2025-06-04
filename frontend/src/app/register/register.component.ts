@@ -42,7 +42,14 @@ export class RegisterComponent implements OnDestroy {
         },
         error: (err) => {
           this.registrationFailed = true;
-          this.errorMessage = err?.error || "Erreur lors de l'inscription";
+          console.error('Erreur d\'inscription:', err);
+          if (typeof err.error === 'string') {
+            this.errorMessage = err.error;
+          } else if (err.error?.message) {
+            this.errorMessage = err.error.message;
+          } else {
+            this.errorMessage = "Erreur lors de l'inscription. Veuillez vérifier vos informations.";
+          }
         },
       });
   }
