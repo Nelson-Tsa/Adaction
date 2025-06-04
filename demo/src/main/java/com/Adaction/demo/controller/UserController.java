@@ -34,7 +34,7 @@ public class UserController {
       return ResponseEntity.badRequest().body("Email already exists");
     }
 
-    user.setRole(Role.AUCUN);
+    user.setRole(Role.ASSOCIATION);
     user.setPassword(passwordEncoder.encode(user.getPassword()));
 
     AssociationLogin savedUser = userRepository.save(user);

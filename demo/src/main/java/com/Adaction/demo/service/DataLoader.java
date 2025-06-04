@@ -4,6 +4,8 @@ import com.Adaction.demo.modele.*;
 import com.Adaction.demo.repository.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -35,6 +37,8 @@ public class DataLoader implements CommandLineRunner {
     private void loadAssociations() {
         try {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             InputStream inputStream = getClass().getResourceAsStream("/data/associations.json");
             List<Association> associations = mapper.readValue(inputStream, new TypeReference<List<Association>>() {});
             
@@ -55,6 +59,8 @@ public class DataLoader implements CommandLineRunner {
     private void loadCities() {
         try {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             InputStream inputStream = getClass().getResourceAsStream("/data/cities.json");
             List<City> cities = mapper.readValue(inputStream, new TypeReference<List<City>>() {});
             
@@ -73,6 +79,8 @@ public class DataLoader implements CommandLineRunner {
     private void loadWasteTypes() {
         try {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             InputStream inputStream = getClass().getResourceAsStream("/data/waste_types.json");
             List<WasteType> wasteTypes = mapper.readValue(inputStream, new TypeReference<List<WasteType>>() {});
             
@@ -91,6 +99,8 @@ public class DataLoader implements CommandLineRunner {
     private void loadVolunteers() {
         try {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             InputStream inputStream = getClass().getResourceAsStream("/data/volunteers.json");
             List<Volunteer> volunteers = mapper.readValue(inputStream, new TypeReference<List<Volunteer>>() {});
             
