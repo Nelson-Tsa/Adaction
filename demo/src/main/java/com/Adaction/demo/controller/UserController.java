@@ -1,9 +1,9 @@
 package com.Adaction.demo.controller;
 
 import com.Adaction.demo.modele.Role;
-import com.Adaction.demo.modele.User;
+import com.Adaction.demo.modele.AssociationLogin;
 import com.Adaction.demo.modele.Volunteer;
-import com.Adaction.demo.repository.UserRepository;
+import com.Adaction.demo.repository.AssociationLoginRepository;
 import com.Adaction.demo.repository.VolunteerRepository;
 import com.Adaction.demo.service.JwtService;
 
@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
-  private final UserRepository userRepository;
+  private final AssociationLoginRepository userRepository;
   private final VolunteerRepository volunteerRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
 
   @PostMapping("/register")
-  public ResponseEntity<?> registerUser(@RequestBody User user) {
+  public ResponseEntity<?> registerUser(@RequestBody AssociationLogin user) {
     if (userRepository.findByEmail(user.getEmail()) != null) {
       return ResponseEntity.badRequest().body("Email already exists");
     }
@@ -34,16 +34,16 @@ public class UserController {
     user.setRole(Role.ASSOCIATION);
     user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-    User savedUser = userRepository.save(user);
+    AssociationLogin savedUser = userRepository.save(user);
     String token = jwtService.generateToken(savedUser.getEmail(), savedUser.getRole().name());
 
     return ResponseEntity.ok(new AuthResponse(token, savedUser.getUsername(), savedUser.getRole()));
   }
 
   @PostMapping("/login")
-  public ResponseEntity<?> loginUser(@RequestBody User loginRequest) {
+  public ResponseEntity<?> loginUser(@RequestBody AssociationLogin loginRequest) {
     try {
-      User user = userRepository.findByEmail(loginRequest.getEmail());
+      AssociationLogin user = userRepository.findByEmail(loginRequest.getEmail());
       if (user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
 
         String token = jwtService.generateToken(user.getEmail(), user.getRole().name());
@@ -75,7 +75,7 @@ public class UserController {
 
     String token = authHeader.substring(7);
     String email = jwtService.extractUsername(token);
-    User user = userRepository.findByEmail(email);
+    AssociationLogin user = userRepository.findByEmail(email);
 
     if (user != null) {
       return ResponseEntity.ok(new AuthResponse(token, user.getUsername(), user.getRole()));

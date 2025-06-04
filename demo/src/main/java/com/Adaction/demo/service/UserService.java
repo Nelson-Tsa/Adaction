@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.Adaction.demo.modele.User;
+import com.Adaction.demo.modele.AssociationLogin;
 import com.Adaction.demo.modele.Volunteer;
-import com.Adaction.demo.repository.UserRepository;
+import com.Adaction.demo.repository.AssociationLoginRepository;
 import com.Adaction.demo.repository.VolunteerRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-  private final UserRepository userRepository;
+  private final AssociationLoginRepository userRepository;
   private final VolunteerRepository volunteerRepository;
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    User user = userRepository.findByEmail(email);
+    AssociationLogin user = userRepository.findByEmail(email);
     if (user != null) {
       return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
           Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())));

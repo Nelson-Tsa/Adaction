@@ -10,9 +10,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "users")
+@Table(name = "association_login")
 @Data
-public class User {
+public class AssociationLogin {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
