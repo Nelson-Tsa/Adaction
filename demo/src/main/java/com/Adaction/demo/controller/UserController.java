@@ -31,7 +31,7 @@ public class UserController {
       return ResponseEntity.badRequest().body("Email already exists");
     }
 
-    user.setRole(Role.ASSOCIATION);
+    user.setRole(Role.AUCUN);
     user.setPassword(passwordEncoder.encode(user.getPassword()));
 
     AssociationLogin savedUser = userRepository.save(user);
@@ -45,7 +45,7 @@ public class UserController {
     try {
       AssociationLogin user = userRepository.findByEmail(loginRequest.getEmail());
       if (user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-
+       
         String token = jwtService.generateToken(user.getEmail(), user.getRole().name());
 
         return ResponseEntity.ok(new AuthResponse(token, user.getUsername(), user.getRole()));
@@ -53,7 +53,7 @@ public class UserController {
 
       Volunteer volunteer = volunteerRepository.findByEmail(loginRequest.getEmail());
       if (volunteer != null && passwordEncoder.matches(loginRequest.getPassword(), volunteer.getPassword())) {
-
+       
         String token = jwtService.generateToken(volunteer.getEmail(), volunteer.getRole().name());
 
         return ResponseEntity.ok(new AuthResponse(token, volunteer.getFirstname(), volunteer.getRole()));
@@ -77,7 +77,9 @@ public class UserController {
     String email = jwtService.extractUsername(token);
     AssociationLogin user = userRepository.findByEmail(email);
 
+    
     if (user != null) {
+      
       return ResponseEntity.ok(new AuthResponse(token, user.getUsername(), user.getRole()));
     }
 
@@ -96,6 +98,7 @@ public class UserController {
     Volunteer volunteer = volunteerRepository.findByEmail(email);
 
     if (volunteer != null) {
+
       return ResponseEntity.ok(new AuthResponse(token, volunteer.getFirstname(), volunteer.getRole()));
     }
 

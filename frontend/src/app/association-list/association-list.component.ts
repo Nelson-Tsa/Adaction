@@ -6,6 +6,7 @@ import { AddButtonComponent } from '../requete/add-button/add-button.component';
 import { DialogService } from '../services/dialog.service';
 import { DeleteButtonComponent } from '../requete/delete-button/delete-button.component';
 import { UpdateButtonComponent } from '../requete/update-button/update-button.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-association-list',
@@ -15,6 +16,7 @@ import { UpdateButtonComponent } from '../requete/update-button/update-button.co
     AddButtonComponent,
     DeleteButtonComponent,
     UpdateButtonComponent
+    
   ],
   templateUrl: './association-list.component.html',
   styleUrl: './association-list.component.css'
@@ -23,7 +25,7 @@ export class AssociationListComponent implements OnInit {
   associations: any[] = [];
   isHomePage: boolean = false;
   
-  constructor(private apiService: ApiService, private router: Router, private dialogService: DialogService) { 
+  constructor(public authService: AuthService,private apiService: ApiService, private router: Router, private dialogService: DialogService) { 
     // Déterminer si on est sur la page home ou non
     this.isHomePage = (this.router.url === '/home');
   }

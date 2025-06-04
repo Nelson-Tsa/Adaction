@@ -5,19 +5,19 @@
     <li *ngFor="let association of associations">
       {{association.image}}{{ association.name }} 
       <app-delete-button 
-      *ngIf="!isHomePage"
+      *ngIf="!isHomePage "
       [entityId]="association.id" 
       (deleteClicked)="onDeleteClicked(association.id)">
     </app-delete-button>
     <app-update-button 
-    *ngIf="!isHomePage"
+    *ngIf="!isHomePage "
     [entityId]="association.id" 
     (updateClicked)="onUpdateClicked(association.id)">
   </app-update-button>
     </li>
   </ul>
   <app-add-button 
-  *ngIf="!isHomePage" 
+  *ngIf="!isHomePage " 
   [entityType]="'association'" 
   (addClicked)="openAddDialog()"
 ></app-add-button>
