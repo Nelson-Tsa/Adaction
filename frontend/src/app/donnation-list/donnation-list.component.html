@@ -7,19 +7,19 @@
           {{ donnation.association.name}} {{donnation.association.image}}
           le {{ donnation.date | date :'dd MMMM yyyy' }}
           <app-delete-button 
-      *ngIf="!isHomePage"
+      *ngIf="!isHomePage && authService.isAdministrator() "
       [entityId]="donnation.id" 
       (deleteClicked)="onDeleteClicked(donnation.id)">
     </app-delete-button>
           <app-update-button 
-            *ngIf="!isHomePage"
+            *ngIf="!isHomePage && authService.isAdministrator()"
             [entityId]="donnation.id" 
             (updateClicked)="onUpdateClicked(donnation.id)">
           </app-update-button>
         </li>
       </ul>
       <app-add-button 
-        *ngIf="!isHomePage" 
+        *ngIf="!isHomePage && authService.isVolunteer() && authService.isAdministrator() || !isHomePage && authService.isVolunteer()"
         [entityType]="'donation'" 
         (addClicked)="openAddDialog()"
       ></app-add-button>

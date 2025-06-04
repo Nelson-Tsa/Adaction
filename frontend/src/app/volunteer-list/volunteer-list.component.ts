@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DialogService } from '../services/dialog.service';
 import { DeleteButtonComponent } from "../requete/delete-button/delete-button.component";
 import { UpdateButtonComponent } from '../requete/update-button/update-button.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-volunteer-list',
@@ -24,7 +25,7 @@ export class VolunteerListComponent implements OnInit {
   volunteers: any[] = [];
   isHomePage: boolean = false;
   
-  constructor(private apiService: ApiService, private router: Router, private dialogService: DialogService) { 
+  constructor(public authService: AuthService,private apiService: ApiService, private router: Router, private dialogService: DialogService) { 
     // Déterminer si on est sur la page home ou non
     this.isHomePage = (this.router.url === '/home');
   }

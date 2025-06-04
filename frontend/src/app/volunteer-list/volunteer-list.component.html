@@ -5,19 +5,19 @@
     <li *ngFor="let volunteer of volunteers">
       {{ volunteer.firstname }} {{ volunteer.lastname }} <!-- Adaptez selon la structure de vos données -->
       <app-delete-button 
-      *ngIf="!isHomePage"
+      *ngIf="!isHomePage && authService.isAdministrator()"
       [entityId]="volunteer.id" 
       (deleteClicked)="onDeleteClicked(volunteer.id)">
     </app-delete-button>
     <app-update-button 
-      *ngIf="!isHomePage"
+      *ngIf="!isHomePage && authService.isAdministrator()"
       [entityId]="volunteer.id" 
       (updateClicked)="onUpdateClicked(volunteer.id)">
     </app-update-button>
     </li>
   </ul>
   <app-add-button 
-    *ngIf="!isHomePage" 
+    *ngIf="!isHomePage && authService.isAdministrator() || !isHomePage && authService.isAssociation()" 
     [entityType]="'volunteer'" 
     (addClicked)="openAddDialog()"
   ></app-add-button>

@@ -32,6 +32,7 @@ public class JwtService {
 
   // Ajoute cette méthode
   public String generateToken(String username, String role) {
+    
     return Jwts.builder()
         .setSubject(username)
         .claim("role", role)

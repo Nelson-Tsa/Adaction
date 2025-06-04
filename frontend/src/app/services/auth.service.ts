@@ -1,3 +1,6 @@
+
+
+import { jwtDecode } from 'jwt-decode';
 // auth.service.ts
 import { Injectable } from '@angular/core';
 
@@ -6,18 +9,31 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   
-  login(authResponse: any) {
-    localStorage.setItem('token', authResponse.token);
-    localStorage.setItem('username', authResponse.username);
-    localStorage.setItem('role', authResponse.role);
-  }
+  // login(authResponse: any) {
+  //   localStorage.setItem('token', authResponse.token);
+  //   localStorage.setItem('username', authResponse.username);
+  //   localStorage.setItem('role', authResponse.role);
+  // }
   
   isAssociation(): boolean {
-    return localStorage.getItem('role') === 'ASSOCIATION';
+    const token: any = localStorage.getItem('token');
+    const decoded : any = jwtDecode(token);
+    const role = decoded.role;
+    return role === 'ASSOCIATION';
   }
   
   isVolunteer(): boolean {
-    return localStorage.getItem('role') === 'VOLONTAIRE';
+    const token: any = localStorage.getItem('token');
+    const decoded : any = jwtDecode(token);
+    const role = decoded.role;
+    return role === 'VOLONTAIRE';
+  }
+  
+  isAdministrator(): boolean {
+    const token: any = localStorage.getItem('token');
+    const decoded : any = jwtDecode(token);
+    const role = decoded.role;
+    return role === 'ADMIN';
   }
   
   getRole(): string {

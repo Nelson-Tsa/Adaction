@@ -10,12 +10,12 @@
           {{ wasteCollected.collect.city.name}}
           
           <app-delete-button 
-      *ngIf="!isHomePage"
+      *ngIf="!isHomePage && authService.isAdministrator()"
       [entityId]="wasteCollected.id" 
       (deleteClicked)="onDeleteClicked(wasteCollected.id)">
     </app-delete-button>
     <app-update-button 
-      *ngIf="!isHomePage"
+      *ngIf="!isHomePage && authService.isAdministrator() || !isHomePage && authService.isVolunteer()"
       [entityId]="wasteCollected.id" 
       (updateClicked)="onUpdateClicked(wasteCollected.id)">
     </app-update-button>
@@ -23,7 +23,7 @@
         </li>
       </ul>
       <app-add-button 
-        *ngIf="!isHomePage" 
+        *ngIf="!isHomePage && authService.isAdministrator()|| !isHomePage && authService.isVolunteer()" 
         [entityType]="'wasteCollected'" 
         (addClicked)="openAddDialog()"
       ></app-add-button>

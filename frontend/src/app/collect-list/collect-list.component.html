@@ -5,19 +5,19 @@
           Collecte crée le {{ collect.createdAt | date :'dd MMMM yyyy' }} par {{ collect.volunteer.firstname }}
          à {{ collect.city.name}}
          <app-delete-button 
-         *ngIf="!isHomePage"
+         *ngIf="!isHomePage && authService.isAdministrator()"
          [entityId]="collect.id" 
          (deleteClicked)="onDeleteClicked(collect.id)">
        </app-delete-button>
        <app-update-button 
-         *ngIf="!isHomePage"
+         *ngIf="!isHomePage && authService.isAdministrator()"
          [entityId]="collect.id" 
          (updateClicked)="onUpdateClicked(collect.id)">
        </app-update-button>
         </li>
       </ul>
       <app-add-button 
-        *ngIf="!isHomePage" 
+        *ngIf="!isHomePage && authService.isAdministrator() || !isHomePage && authService.isVolunteer()" 
         [entityType]="'collect'" 
         (addClicked)="openAddDialog()"
       ></app-add-button>
