@@ -1,0 +1,24 @@
+
+<div class="card-list">
+    <h1>Liste des volontaires</h1>
+<ul *ngIf="volunteers.length > 0">
+    <li *ngFor="let volunteer of volunteers">
+      {{ volunteer.firstname }} {{ volunteer.lastname }} <!-- Adaptez selon la structure de vos données -->
+      <app-delete-button 
+      *ngIf="!isHomePage"
+      [entityId]="volunteer.id" 
+      (deleteClicked)="onDeleteClicked(volunteer.id)">
+    </app-delete-button>
+    <app-update-button 
+      *ngIf="!isHomePage"
+      [entityId]="volunteer.id" 
+      (updateClicked)="onUpdateClicked(volunteer.id)">
+    </app-update-button>
+    </li>
+  </ul>
+  <app-add-button 
+    *ngIf="!isHomePage" 
+    [entityType]="'volunteer'" 
+    (addClicked)="openAddDialog()"
+  ></app-add-button>
+</div>

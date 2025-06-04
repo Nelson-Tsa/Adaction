@@ -1,0 +1,77 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<!-- Champ de recherche de ville avec autocomplétion (visible uniquement pour l'ajout de ville) -->
+<div *ngIf="entityType === 'city'" class="city-search">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Rechercher une ville</mat-label>
+    <input matInput [formControl]="cityControl" placeholder="Commencez à taper le nom d'une ville...">
+  </mat-form-field>
+  
+  <!-- Liste des suggestions -->
+  <div class="suggestions-container" *ngIf="showCitySuggestions">
+    <div class="suggestion-item" *ngFor="let city of suggestions" (click)="selectCity(city)">
+      {{ city.display_name }}
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <div *ngFor="let field of fields">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ field.label }}</mat-label>
+        
+        <input *ngIf="field.type === 'text'" matInput [formControlName]="field.name">
+        <input *ngIf="field.type === 'number'" matInput type="number" [formControlName]="field.name">
+        <input *ngIf="field.type === 'date'" matInput type="date" [formControlName]="field.name">
+        
+        <!-- Menu déroulant pour les sélections -->
+        <mat-select *ngIf="field.type === 'select'" [formControlName]="field.name">
+          <!-- Villes -->
+          <ng-container *ngIf="field.options === 'cities'">
+            <mat-option *ngFor="let city of cities" [value]="city.id">
+              {{ city.name }}
+            </mat-option>
+          </ng-container>
+          
+          <!-- Volontaires -->
+          <ng-container *ngIf="field.options === 'volunteers'">
+            <mat-option *ngFor="let volunteer of volunteers" [value]="volunteer.id">
+              {{ volunteer.firstname }} {{ volunteer.lastname }}
+            </mat-option>
+          </ng-container>
+          
+          <!-- Collectes -->
+          <ng-container *ngIf="field.options === 'collects'">
+            <mat-option *ngFor="let collect of collects" [value]="collect.id">
+              Collecte #{{ collect.id }} ({{ collect.date | date }})
+            </mat-option>
+          </ng-container>
+          
+          <!-- Types de déchets -->
+          <ng-container *ngIf="field.options === 'wasteTypes'">
+            <mat-option *ngFor="let wasteType of wasteTypes" [value]="wasteType.id">
+              {{ wasteType.label }}
+            </mat-option>
+          </ng-container>
+          
+          <!-- Associations -->
+          <ng-container *ngIf="field.options === 'associations'">
+            <mat-option *ngFor="let association of associations" [value]="association.id">
+              {{ association.name }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        
+        <mat-error *ngIf="entityForm.get(field.name)?.errors?.['required']">
+          Ce champ est requis
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Annuler</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!entityForm.valid">Ajouter</button>
+  </div>
+</form>

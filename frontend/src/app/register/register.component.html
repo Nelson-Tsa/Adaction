@@ -1,0 +1,80 @@
+<div class="register-container">
+  <h2>Inscription</h2>
+
+  <form [formGroup]="registerFormGroup" (ngSubmit)="register()">
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+        placeholder="Entrez votre nom d'utilisateur"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          registerFormGroup.get('username')?.invalid &&
+          registerFormGroup.get('username')?.touched
+        "
+        class="error"
+      >
+        Le nom d'utilisateur est requis.
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Adresse e-mail</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Entrez votre adresse e-mail"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          registerFormGroup.get('email')?.invalid &&
+          registerFormGroup.get('email')?.touched
+        "
+        class="error"
+      >
+        L'e-mail est requis et doit être valide.
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Entrez votre mot de passe"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          registerFormGroup.get('password')?.invalid &&
+          registerFormGroup.get('password')?.touched
+        "
+        class="error"
+      >
+        Le mot de passe est requis (minimum 6 caractères).
+      </div>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="registrationFailed" class="error">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" [disabled]="registerFormGroup.invalid">
+      S'inscrire
+    </button>
+  </form>
+
+  <a routerLink="/login">Connexion</a>
+</div>

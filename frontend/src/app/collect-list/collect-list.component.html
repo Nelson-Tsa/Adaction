@@ -1,0 +1,24 @@
+<div class="card-list">
+    <h1>Liste des collectes</h1>
+    <ul *ngIf="collects.length > 0">
+        <li *ngFor="let collect of collects">
+          Collecte crée le {{ collect.createdAt | date :'dd MMMM yyyy' }} par {{ collect.volunteer.firstname }}
+         à {{ collect.city.name}}
+         <app-delete-button 
+         *ngIf="!isHomePage"
+         [entityId]="collect.id" 
+         (deleteClicked)="onDeleteClicked(collect.id)">
+       </app-delete-button>
+       <app-update-button 
+         *ngIf="!isHomePage"
+         [entityId]="collect.id" 
+         (updateClicked)="onUpdateClicked(collect.id)">
+       </app-update-button>
+        </li>
+      </ul>
+      <app-add-button 
+        *ngIf="!isHomePage" 
+        [entityType]="'collect'" 
+        (addClicked)="openAddDialog()"
+      ></app-add-button>
+</div>

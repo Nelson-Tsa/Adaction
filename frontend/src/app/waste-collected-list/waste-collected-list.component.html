@@ -1,0 +1,30 @@
+<div class="card-list">
+    <h1>Liste des collectes de déchets</h1>
+    <ul *ngIf="wasteCollecteds.length > 0">
+        <li *ngFor="let wasteCollected of wasteCollecteds">
+          <!-- {{ wasteCollected.id }}  -->
+          <!-- {{ wasteCollected.label }} -->
+           {{ wasteCollected.quantity }}
+            {{ wasteCollected.wasteType.label}} a été collecte par 
+          {{ wasteCollected.collect.volunteer.firstname}} à
+          {{ wasteCollected.collect.city.name}}
+          
+          <app-delete-button 
+      *ngIf="!isHomePage"
+      [entityId]="wasteCollected.id" 
+      (deleteClicked)="onDeleteClicked(wasteCollected.id)">
+    </app-delete-button>
+    <app-update-button 
+      *ngIf="!isHomePage"
+      [entityId]="wasteCollected.id" 
+      (updateClicked)="onUpdateClicked(wasteCollected.id)">
+    </app-update-button>
+          
+        </li>
+      </ul>
+      <app-add-button 
+        *ngIf="!isHomePage" 
+        [entityType]="'wasteCollected'" 
+        (addClicked)="openAddDialog()"
+      ></app-add-button>
+</div>

@@ -1,0 +1,25 @@
+/* .add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000; 
+  }
+  
+  .add-button:hover {
+    background-color: #45a049;
+  }
+  
+  .icon {
+    font-size: 20px;
+    font-weight: bold;
+  } */

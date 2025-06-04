@@ -1,0 +1,23 @@
+<div class="card-list">
+    <h1>Liste des types de déchets</h1>
+    <ul *ngIf="wasteTypes.length > 0">
+        <li *ngFor="let wasteType of wasteTypes">
+          {{ wasteType.label }}
+          <app-delete-button 
+      *ngIf="!isHomePage"
+      [entityId]="wasteType.id" 
+      (deleteClicked)="onDeleteClicked(wasteType.id)">
+    </app-delete-button>
+    <app-update-button 
+      *ngIf="!isHomePage"
+      [entityId]="wasteType.id" 
+      (updateClicked)="onUpdateClicked(wasteType.id)">
+    </app-update-button>
+        </li>
+      </ul>
+      <app-add-button 
+        *ngIf="!isHomePage" 
+        [entityType]="'wasteType'" 
+        (addClicked)="openAddDialog()"
+      ></app-add-button>
+</div>

@@ -1,0 +1,27 @@
+<div class="card-list">
+    <h1>Liste des dons</h1>
+    <ul *ngIf="donnations.length > 0">
+        <li *ngFor="let donnation of donnations">
+          {{ donnation.volunteer.firstname}} {{ donnation.volunteer.lastname}} à fait un don
+          de {{ donnation.amount}} point(s) à 
+          {{ donnation.association.name}} {{donnation.association.image}}
+          le {{ donnation.date | date :'dd MMMM yyyy' }}
+          <app-delete-button 
+      *ngIf="!isHomePage"
+      [entityId]="donnation.id" 
+      (deleteClicked)="onDeleteClicked(donnation.id)">
+    </app-delete-button>
+          <app-update-button 
+            *ngIf="!isHomePage"
+            [entityId]="donnation.id" 
+            (updateClicked)="onUpdateClicked(donnation.id)">
+          </app-update-button>
+        </li>
+      </ul>
+      <app-add-button 
+        *ngIf="!isHomePage" 
+        [entityType]="'donation'" 
+        (addClicked)="openAddDialog()"
+      ></app-add-button>
+      
+</div>

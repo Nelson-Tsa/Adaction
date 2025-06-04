@@ -1,0 +1,23 @@
+<header>
+  <h1>Adaction</h1>
+  <a
+    routerLink="home"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Home</a
+  >
+  <a routerLink="association-list" routerLinkActive="active">Association</a>
+  <a routerLink="volunteer-list" routerLinkActive="active">Volunteer</a>
+  <a routerLink="city-list" routerLinkActive="active">City</a>
+  <a routerLink="waste-type-list" routerLinkActive="active">Waste Type</a>
+  <a routerLink="collect-list" routerLinkActive="active">Collect</a>
+  <a routerLink="waste-collected-list" routerLinkActive="active"
+    >Waste Collected</a
+  >
+  <a routerLink="donnation-list" routerLinkActive="active">Donnation</a>
+
+  <a *ngIf="hasToken(); else loginLink" (click)="logout()">Déconnexion</a>
+  <ng-template #loginLink>
+    <a routerLink="login" routerLinkActive="active">Connexion</a>
+  </ng-template>
+</header>
