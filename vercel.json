@@ -1,7 +1,7 @@
 {
   "version": 2,
   "public": true,
-  "buildCommand": "npm install && npm run build",
+  "buildCommand": "cd frontend && npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "frontend/dist/frontend",
   "rewrites": [
     { 
@@ -9,8 +9,15 @@
       "destination": "https://adaction-backend.onrender.com/api/:path*" 
     },
     {
+      "source": "/:path*", 
+      "destination": "https://adaction-backend.onrender.com/:path*" 
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
