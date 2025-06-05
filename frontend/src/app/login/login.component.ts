@@ -7,10 +7,13 @@ import { User } from '../model/user.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
+
   selector: 'app-login',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+
 })
 export class LoginComponent implements OnDestroy {
   private formBuilder = inject(FormBuilder);

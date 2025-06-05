@@ -1,3 +1,4 @@
+import { AppModule } from '../app.module';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../services/api.service';
@@ -5,7 +6,7 @@ import { AddButtonComponent } from '../requete/add-button/add-button.component';
 import { Router } from '@angular/router';
 import { DialogService } from '../services/dialog.service';
 import { DeleteButtonComponent } from "../requete/delete-button/delete-button.component";
-import { UpdateButtonComponent } from '../requete/update-button/update-button.component';
+
 import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-waste-collected-list',
@@ -14,7 +15,7 @@ import { AuthService } from '../services/auth.service';
     CommonModule,
     AddButtonComponent,
     DeleteButtonComponent,
-    UpdateButtonComponent
+    AppModule
 ],
   templateUrl: './waste-collected-list.component.html',
   styleUrl: './waste-collected-list.component.css'
