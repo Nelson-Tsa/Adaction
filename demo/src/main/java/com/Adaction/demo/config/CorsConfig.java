@@ -16,7 +16,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         // Autoriser plusieurs origines
         config.addAllowedOrigin("http://localhost:4200/"); // URL de dev local
-        config.addAllowedOrigin("https://adaction-frontend.vercel.app"); // URL de Vercel
+        config.addAllowedOrigin("https://adactionapp.vercel.app/"); // URL de Vercel
         config.addAllowedOrigin("https://adaction-frontend.onrender.com"); // URL de Render
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
