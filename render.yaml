@@ -2,13 +2,18 @@ services:
   - type: web
     name: adaction-frontend
     runtime: static
-    buildCommand: cd frontend && npm install --legacy-peer-deps && npm run build
-    staticPublishPath: frontend/dist/frontend
+    buildCommand: cd frontend && npm install --legacy-peer-deps && npm run build && cp -r frontend/dist/frontend/* frontend/dist/ || true
+    staticPublishPath: ./frontend/dist
     routes:
       - type: rewrite
-        source: /*
+        source: /**
         destination: /index.html
     headers:
-      - path: /*
+      - path: /**
         name: Cache-Control
         value: no-cache
+    env:
+      - key: NODE_VERSION
+        value: 20.x
+      - key: SPA_MODE
+        value: true
