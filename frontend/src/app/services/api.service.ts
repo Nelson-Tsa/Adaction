@@ -1,14 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+
+// Interface pour le type window.apiConfig
+interface ApiConfig {
+  apiUrl: string;
+}
+
+// Étendre l'interface Window pour inclure apiConfig
+declare global {
+  interface Window {
+    apiConfig?: ApiConfig;
+  }
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  // URL de base de votre API Spring Boot depuis les variables d'environnement
-  private baseUrl = environment.apiUrl; // Utilise l'URL appropriée selon l'environnement
+  // URL de base de votre API Spring Boot depuis la configuration dynamique
+  private baseUrl = window.apiConfig?.apiUrl || 'http://localhost:8080'; // Utilise l'URL appropriée selon l'environnement
 
   constructor(private http: HttpClient) { }
 
