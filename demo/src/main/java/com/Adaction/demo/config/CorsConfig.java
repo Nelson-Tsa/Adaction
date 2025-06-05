@@ -14,7 +14,10 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200/"); // URL de votre app Angular
+        // Autoriser plusieurs origines
+        config.addAllowedOrigin("http://localhost:4200/"); // URL de dev local
+        config.addAllowedOrigin("https://adaction-frontend.vercel.app"); // URL de Vercel
+        config.addAllowedOrigin("https://adaction-frontend.onrender.com"); // URL de Render
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
