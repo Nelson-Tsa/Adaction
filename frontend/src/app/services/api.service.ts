@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  // URL de base de votre API Spring Boot
-  private baseUrl = 'http://localhost:8080'; // Port standard Spring Boot, à ajuster si nécessaire
+  // URL de base de votre API Spring Boot depuis les variables d'environnement
+  private baseUrl = environment.apiUrl; // Utilise l'URL appropriée selon l'environnement
 
   constructor(private http: HttpClient) { }
 
