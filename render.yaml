@@ -2,10 +2,13 @@ services:
   - type: web
     name: adaction-frontend
     runtime: node
-    buildCommand: cd frontend && npm install --legacy-peer-deps && npm run build
-    startCommand: cd frontend && npm start
+    rootDir: frontend
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm start
     env:
       - key: NODE_VERSION
         value: 20.x
       - key: PORT
         value: 10000
+      - key: NODE_ENV
+        value: production

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { User } from '../model/user.model';
+import { environment } from '../../environments/environment';
 
 export interface Credentials {
   username: string;
@@ -14,7 +15,7 @@ export interface Credentials {
 })
 export class LoginService {
   private http = inject(HttpClient);
-  private BASE_URL = 'http://localhost:8080';
+  private BASE_URL = environment.apiUrl;
 
   user = signal<User | null | undefined>(undefined);
 
