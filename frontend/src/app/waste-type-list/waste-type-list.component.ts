@@ -1,4 +1,4 @@
-import { AppModule } from '../app.module';
+import { UpdateButtonComponent } from '../requete/update-button/update-button.component';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../services/api.service';
@@ -15,7 +15,7 @@ import { AuthService } from '../services/auth.service';
     CommonModule,
     AddButtonComponent,
     DeleteButtonComponent,
-    AppModule
+    UpdateButtonComponent
 ],
   templateUrl: './waste-type-list.component.html',
   styleUrl: './waste-type-list.component.css'

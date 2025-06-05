@@ -1,4 +1,4 @@
-import { AppModule } from '../app.module';
+import { UpdateButtonComponent } from '../requete/update-button/update-button.component';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import { AuthService } from '../services/auth.service';
     CommonModule,
     AddButtonComponent,
     DeleteButtonComponent,
-    AppModule
+    UpdateButtonComponent
     
   ],
   templateUrl: './association-list.component.html',

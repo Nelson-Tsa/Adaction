@@ -1,4 +1,4 @@
-import { AppModule } from '../app.module';
+import { UpdateButtonComponent } from '../requete/update-button/update-button.component';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../services/api.service';
@@ -18,7 +18,7 @@ import { AuthService } from '../services/auth.service';
     AddButtonComponent,
     DeleteButtonComponent,
     DatePipe,
-    AppModule
+    UpdateButtonComponent
 
   ],
   providers: [],

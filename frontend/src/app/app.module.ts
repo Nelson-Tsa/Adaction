@@ -7,17 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    UpdateButtonComponent
-  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    UpdateButtonComponent // Importé comme composant standalone
   ],
-  exports: [
-    UpdateButtonComponent
-  ]
+  exports: []
 })
 export class AppModule { }
